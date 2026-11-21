@@ -12,456 +12,1023 @@ document.documentElement.setAttribute('data-theme',savedTheme==='light'||savedTh
 }catch(e){document.documentElement.setAttribute('data-theme','dark')}
 </script>
 <style>
-/* Базавий дизайн */
+/* ==========================================================================
+   ALIFBOMIZ.UZ - Minimalist Clean UI & Responsive Design System
+   ========================================================================== */
+
 :root {
-  --bg: #f5f5f7;
-  --card: #fff;
-  --tx: #1d1d1f;
-  --mut: #6e6e6e;
-  --ac: #0071e3;
-  --ac2: #e8f4ff;
-  --bd: rgba(0, 0, 0, 0.08);
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Light Mode Colors */
+  --bg-primary: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f1f5f9;
+  --bg-subtle: #f1f5f9;
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-inverse: #ffffff;
+  
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-light: #eff6ff;
+  --accent-border: rgba(37, 99, 235, 0.2);
+  
+  --border-color: #e2e8f0;
+  --border-subtle: #f1f5f9;
+  
+  --highlight-bg: #fef9c3;
+  --highlight-border: #fde047;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 }
 
-* { box-sizing: border-box; }
-body { 
-  margin: 0; 
-  padding: 0; 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: var(--bg);
-  color: var(--tx);
+:root[data-theme="dark"] {
+  --bg-primary: #0b0f19;
+  --bg-surface: #141c2e;
+  --bg-surface-hover: #1e293b;
+  --bg-subtle: #1e293b;
+  
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-inverse: #0f172a;
+  
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-light: #1e293b;
+  --accent-border: rgba(59, 130, 246, 0.3);
+  
+  --border-color: #1e293b;
+  --border-subtle: #192237;
+  
+  --highlight-bg: #422006;
+  --highlight-border: #ca8a04;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-primary: #0b0f19;
+    --bg-surface: #141c2e;
+    --bg-surface-hover: #1e293b;
+    --bg-subtle: #1e293b;
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --text-inverse: #0f172a;
+    
+    --accent: #3b82f6;
+    --accent-hover: #60a5fa;
+    --accent-light: #1e293b;
+    --accent-border: rgba(59, 130, 246, 0.3);
+    
+    --border-color: #1e293b;
+    --border-subtle: #192237;
+    
+    --highlight-bg: #422006;
+    --highlight-border: #ca8a04;
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   Navigation Bar (Responsive Header)
+   ========================================================================== */
+
+header.nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(248, 250, 252, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+:root[data-theme="dark"] header.nav-header {
+  background: rgba(11, 15, 25, 0.85);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) header.nav-header {
+    background: rgba(11, 15, 25, 0.85);
+  }
+}
+
+nav.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  transition: color 0.2s ease, background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+nav a:hover, nav a:focus-visible {
+  color: var(--accent);
+  background-color: var(--bg-surface-hover);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-toggle {
+  display: none;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Mobile Nav Drawer / Dropdown */
+@media (max-width: 900px) {
+  .nav-container {
+    flex-wrap: wrap;
+    padding: 10px 16px;
+  }
+  
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .nav-links.active {
+    display: flex;
+  }
+
+  nav a {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ==========================================================================
+   Buttons & Tags
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--accent);
+  color: #ffffff !important;
+  font-size: 0.9375rem;
+  font-weight: 650;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-sm);
+  line-height: 1.3;
+}
+
+.btn:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.o {
+  background-color: var(--bg-surface);
+  color: var(--accent) !important;
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn.o:hover {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--accent-border);
+  color: var(--accent-hover) !important;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   Layout Container
+   ========================================================================== */
+
+.w {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+
+.hero {
+  background: linear-gradient(135deg, var(--bg-surface) 0%, var(--accent-light) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 48px 36px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+  max-width: 850px;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero p {
+  margin: 0;
+  font-size: 1.125rem;
+  color: var(--text-muted);
+  max-width: 780px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 28px 20px;
+    border-radius: var(--radius-lg);
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .hero-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   General Sections & Cards
+   ========================================================================== */
+
+section {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.3s ease;
+}
+
+section h2 {
+  margin: 0 0 8px 0;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+section .sub {
+  margin: 0 0 24px 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow-md);
+}
+
+.card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.card p {
+  margin: 0 0 12px 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+ol, ul {
+  margin: 0 0 16px 0;
+  padding-left: 20px;
+  color: var(--text-main);
+}
+
+li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
   line-height: 1.5;
 }
 
-/* Барча экранлар учун умумий контейнер */
-.w {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
+@media (max-width: 640px) {
+  section {
+    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+  }
 }
 
-/* Навигацияни тўғрилаш */
-nav {
+/* ==========================================================================
+   Letters Grid (Alifbo)
+   ========================================================================== */
+
+.letters {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  margin-bottom: 16px;
+}
+
+.l {
+  appearance: none;
+  position: relative;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-align: center;
+  padding: 12px 4px;
+  font: inherit;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 72px;
+}
+
+.l:hover, .l:focus-visible {
+  transform: scale(1.05);
+  border-color: var(--accent);
+  z-index: 2;
+  box-shadow: var(--shadow-md);
+}
+
+.l b {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.l small {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+.l.n {
+  background-color: var(--highlight-bg);
+  border-color: var(--highlight-border);
+}
+
+.l::after {
+  content: attr(data-word);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background-color: var(--text-main);
+  color: var(--bg-primary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+}
+
+.l:hover::after, .l:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ==========================================================================
+   Media Elements (Videos & Images)
+   ========================================================================== */
+
+.vid {
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  margin-top: auto;
+  border: 1px solid var(--border-color);
+}
+
+.vid video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+  display: block;
+}
+
+img.kb {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+img.kb:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.android-keyboards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.android-keyboards figure {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-surface);
+  text-align: center;
+}
+
+.android-keyboards img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.android-keyboards img:hover {
+  transform: scale(1.03);
+}
+
+.android-keyboards figcaption {
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Converter Section
+   ========================================================================== */
+
+.conv {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .conv {
+    grid-template-columns: 1fr;
+  }
+}
+
+textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  font: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-border);
+}
+
+.docx-tools {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+#docxFile {
+  display: none;
+}
+
+#docxDownload:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#docxStatus {
+  flex-basis: 100%;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Trainer Section (Klaviaturada yozish mashqi)
+   ========================================================================== */
+
+.trainer-card {
+  width: 100%;
+  margin: 10px auto 0;
+  text-align: center;
+}
+
+.trainer-status {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  background: var(--card);
-  border-bottom: 1px solid var(--bd);
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  padding: 8px 16px;
+  background-color: var(--bg-subtle);
+  border-radius: var(--radius-md);
 }
 
-/* Мобил учун мослашув */
-@media (max-width: 768px) {
-  nav { flex-direction: column; gap: 10px; }
-  .grid { grid-template-columns: 1fr !important; }
+.trainer-prompt {
+  margin: 16px 0;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  word-break: break-word;
 }
-.hero{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:34px 0 26px}
-h1{width:100%;font-size:clamp(28px,6vw,46px);line-height:1.15;margin:0 0 14px}
-h1 span{color:var(--ac)}
-.hero p{width:100%;font-size:18px;color:var(--mut);max-width:680px;margin:0 0 18px}
-.hero-actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{display:inline-block;background:var(--ac);color:#fff;padding:10px 18px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;border:0;cursor:pointer}
-.btn.o{background:var(--ac2);color:var(--ac)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn:not(.o){color:#08201a}}
-:root[data-theme="dark"] .btn:not(.o){color:#08201a}
-section{padding:28px 0;border-top:1px solid var(--bd)}
-h2{font-size:26px;margin:0 0 6px}
-.sub{color:var(--mut);margin:0 0 18px}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
-.card h3{margin:0 0 8px;font-size:18px}
-.card p{margin:0 0 10px;color:var(--mut);font-size:15px}
-ol{padding-left:20px;margin:0 0 12px}li{margin-bottom:6px}
-.letters{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(64px,1fr))}
-.l{appearance:none;position:relative;background:var(--card);border:1px solid var(--bd);border-radius:10px;text-align:center;padding:8px 2px;font:inherit;color:var(--tx);cursor:pointer;transition:transform .15s ease}
-.l:hover,.l:focus-visible{transform:scale(1.06);z-index:1}
-.l::after{content:attr(data-word);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);padding:4px 10px;border-radius:6px;background:var(--tx);color:var(--bg);font-size:13px;font-weight:600;white-space:nowrap;pointer-events:none;opacity:0;visibility:hidden;z-index:2}
-.l:hover::after,.l:focus-visible::after{opacity:1;visibility:visible}
-.l b{display:block;font-size:22px}.l small{color:var(--mut);font-size:12px}
-.l.n{background:var(--hl);border-color:#e0b64a}
-.vid{aspect-ratio:16/9;background:var(--ac2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--ac);font-weight:600;margin-bottom:10px;text-align:center;padding:0;overflow:hidden;position:relative;transition:transform .2s ease,box-shadow .2s ease}
-@media (hover:hover){.vid:hover{transform:scale(1.08);z-index:2;box-shadow:0 10px 28px rgba(0,0,0,.35);cursor:zoom-in}}
-.vid video{width:100%;height:100%;object-fit:contain;border-radius:inherit;background:#000}
-.vid video:fullscreen,.vid video:-webkit-full-screen{width:100vw;height:100vh;object-fit:contain;border-radius:0}
-@media (prefers-reduced-motion:reduce){.vid{transition:none}}
-.conv{display:grid;gap:12px;grid-template-columns:1fr 1fr}
-@media (max-width:640px){.conv{grid-template-columns:1fr}}
-.docx-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
-#docxFile{display:none}
-#docxDownload:disabled{opacity:.55;cursor:not-allowed}
-#docxStatus{flex-basis:100%}
-textarea{width:100%;min-height:160px;padding:12px;border-radius:12px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font:16px/1.5 inherit;resize:vertical}
-.tag{display:inline-block;background:var(--ac2);color:var(--ac);border-radius:20px;padding:2px 10px;font-size:13px;margin-bottom:8px}
-.note{font-size:13px;color:var(--mut)}
-#storesInfo,#stickersInfo,#laserInfo{white-space:pre-line;margin:8px 0 0}
-#lg{padding:6px 12px;font-size:14px}
-img.kb{width:100%;display:block;border-radius:0;background:#000;position:relative;z-index:1;transition:transform .2s ease;cursor:zoom-in}
-@media (hover:hover){img.kb:hover{transform:scale(1.35);z-index:2;cursor:zoom-in;box-shadow:0 10px 28px rgba(0,0,0,.35)}}
-@media (prefers-reduced-motion:reduce){img.kb{transition:none}}
-#imageZoom{position:fixed;inset:0;width:100vw;height:100vh;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(0,0,0,.92);overflow:hidden}
-#imageZoom[open]{display:flex;align-items:center;justify-content:center}
-#imageZoom::backdrop{background:rgba(0,0,0,.88)}
-#imageZoom img{display:block;width:100vw;height:100vh;max-width:100vw;max-height:100vh;object-fit:contain}
-#imageZoomClose{position:absolute;top:14px;right:14px;width:48px;height:48px;padding:0;font-size:28px}
-footer{padding:26px 0 40px;color:var(--mut);font-size:14px;border-top:1px solid var(--bd)}
-:root{color-scheme:light;--bg:#f4f6f5;--card:#fff;--tx:#19211f;--mut:#68736f;--ac:#087f5b;--ac2:#e8f4ee;--bd:#e2e8e4;--hl:#fff4d6;--shadow:0 12px 32px rgba(28,48,39,.06)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#111714;--card:#1a231f;--tx:#edf4f0;--mut:#a1aea8;--ac:#55d6a5;--ac2:#21372d;--bd:#2c3932;--hl:#3a321d;--shadow:0 12px 32px rgba(0,0,0,.18)}}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#111714;--card:#1a231f;--tx:#edf4f0;--mut:#a1aea8;--ac:#55d6a5;--ac2:#21372d;--bd:#2c3932;--hl:#3a321d;--shadow:0 12px 32px rgba(0,0,0,.18)}
-html{scroll-behavior:smooth}
-body{background:radial-gradient(ellipse at 12% 0%,var(--ac2),transparent 36%),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-nav{position:sticky;top:0;z-index:10;width:calc(100% - 48px);padding:12px 0;gap:8px 10px;border-bottom:1px solid var(--bd);background:var(--bg)}
-nav b{font-size:19px;letter-spacing:-.04em}
-nav a{padding:7px 10px;border-radius:10px;font-weight:550;transition:background .18s ease,color .18s ease}
-nav a:hover{background:var(--ac2)}
-.w{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px;max-width:1240px;padding:24px 24px 48px}
-.hero{grid-column:1/-1;position:relative;min-height:0;flex-direction:column;align-items:flex-start;justify-content:center;gap:24px;padding:28px 38px;border:1px solid var(--bd);border-radius:28px;background:linear-gradient(135deg,var(--card),var(--ac2));box-shadow:var(--shadow);overflow:hidden}
-.hero-copy{position:relative;z-index:1;max-width:100%}
-.hero h1{max-width:700px;font-size:clamp(36px,4vw,60px);letter-spacing:-.055em;line-height:1.04}
-.hero h1 span{color:var(--ac)}
-.hero p{max-width:620px;font-size:16px;line-height:1.65}
-.tag{padding:5px 12px;border:1px solid var(--bd);background:var(--card);border-radius:999px;font-weight:650}
-.btn{border-radius:12px;padding:11px 16px;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(8,127,91,.14)}
-.btn.o{border:1px solid var(--bd)}
-section{align-self:start;padding:24px;border:1px solid var(--bd);border-radius:24px;background:var(--card);box-shadow:var(--shadow)}
-h2{font-size:clamp(21px,2.4vw,28px);letter-spacing:-.04em;line-height:1.2}
-.sub{font-size:14px}
-.card{border-color:var(--bd);border-radius:18px;box-shadow:0 6px 20px rgba(28,48,39,.04)}
-.letters{grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:9px}
-.l{border-radius:14px;padding:10px 3px}
-.l.n{background:var(--hl);border-color:#e8c66f}
-.conv{gap:12px}
-textarea{min-height:180px;border-radius:16px;font:inherit;line-height:1.55}
-.docx-tools{gap:10px}
-.vid{border-radius:14px}
-img.kb{border-radius:0}
-@media (hover:hover){img.kb:hover{transform:scale(1.5);box-shadow:0 10px 28px rgba(0,0,0,.18)}}
-#yozish{grid-column:span 5}
-#yozish .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-#alifbo{grid-column:span 5}
-#konverter{grid-column:span 7}
-#windows,#android{grid-column:span 6}
-#windows{grid-column:span 5}
-#windows .grid{grid-template-columns:1fr}
-#jihoz{grid-column:span 12}
-footer{grid-column:1/-1;padding:20px 4px 12px;border-top:1px solid var(--bd)}
-@media (max-width:900px){
- .w{grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
- .hero,#yozish{grid-column:span 6}
- #alifbo,#konverter,#windows,#android{grid-column:span 3}
- .hero{min-height:0;padding:24px 30px}
+
+.trainer-prompt .typed { color: var(--text-muted); opacity: 0.6; }
+.trainer-prompt .next { color: var(--accent); text-decoration: underline; text-underline-offset: 6px; }
+.trainer-prompt .new-letter { color: #ef4444; font-weight: 900; }
+
+.trainer-combo {
+  display: none;
+  margin: 0 auto 16px;
+  padding: 12px 16px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  background-color: rgba(239, 68, 68, 0.08);
+  color: var(--text-main);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
-@media (max-width:640px){
-.android-keyboards{grid-template-columns:1fr}
-.keyboard-row{gap:2px}
-.keyboard-key{width:clamp(24px,7.8vw,38px);height:42px;font-size:11px}
-.keyboard-key.wide{width:clamp(36px,11vw,54px)}
-.keyboard-key.enter{width:clamp(58px,16vw,78px)}
-.keyboard-key.space{width:clamp(130px,44vw,210px)}
- nav{width:calc(100% - 32px);gap:5px;padding:10px 0}
- nav b{width:100%;margin:0 0 3px}
- nav a{padding:5px 7px;font-size:13px}
- .w{grid-template-columns:minmax(0,1fr);gap:12px;padding:16px 16px 36px}
- .hero,#yozish,#alifbo,#konverter,#windows,#android,#jihoz,footer{grid-column:1}
- .hero{min-height:0;padding:24px;border-radius:22px}
- .hero-copy{max-width:100%}
- .hero h1{font-size:clamp(34px,10vw,48px)}
- section{padding:20px;border-radius:20px}
- #yozish .grid{grid-template-columns:1fr}
- .conv{grid-template-columns:1fr}
+
+.trainer-combo.visible {
+  display: block;
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
-:root{
---bg:#f5f5f7;
---card:rgba(255,255,255,.92);
---tx:#1d1d1f;
---mut:#6e6e73;
---ac:#0071e3;
---ac2:#edf4ff;
---bd:rgba(0,0,0,.08);
---hl:#fff8d9;
---shadow:0 1px 2px rgba(0,0,0,.03),0 12px 36px rgba(0,0,0,.06);
+
+.trainer-input {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  min-height: 54px;
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  padding: 8px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-:root[data-theme="dark"]{
---bg:#000;
---card:rgba(28,28,30,.92);
---tx:#f5f5f7;
---mut:#a1a1a6;
---ac:#2997ff;
---ac2:#10243d;
---bd:rgba(255,255,255,.1);
---hl:#3a321d;
---shadow:0 1px 2px rgba(0,0,0,.4),0 18px 48px rgba(0,0,0,.28);
+
+.trainer-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-border);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
---bg:#000;
---card:rgba(28,28,30,.92);
---tx:#f5f5f7;
---mut:#a1a1a6;
---ac:#2997ff;
---ac2:#10243d;
---bd:rgba(255,255,255,.1);
---hl:#3a321d;
---shadow:0 1px 2px rgba(0,0,0,.4),0 18px 48px rgba(0,0,0,.28);
-}}
-html{scroll-behavior:smooth}
-body{
-background:
-radial-gradient(circle at 50% -20%,rgba(0,113,227,.07),transparent 32rem),
-var(--bg);
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
--webkit-font-smoothing:antialiased;
-text-rendering:optimizeLegibility;
+
+.trainer-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
 }
-nav{
-position:sticky;
-top:10px;
-z-index:20;
-width:min(1180px,calc(100% - 32px));
-max-width:none;
-margin:10px auto 0;
-padding:9px 12px;
-gap:4px 6px;
-border:1px solid var(--bd);
-border-radius:16px;
-background:rgba(255,255,255,.78);
-box-shadow:0 4px 24px rgba(0,0,0,.06);
-backdrop-filter:saturate(180%) blur(18px);
--webkit-backdrop-filter:saturate(180%) blur(18px);
+
+.trainer-actions .btn {
+  min-width: 140px;
 }
-:root[data-theme="dark"] nav{background:rgba(28,28,30,.78)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav{background:rgba(28,28,30,.78)}}
-nav b{
-font-size:17px;
-font-weight:700;
-letter-spacing:-.02em;
+
+.sound-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
 }
-nav a{
-padding:7px 9px;
-border-radius:9px;
-font-size:13px;
-font-weight:600;
-transition:background .2s ease,color .2s ease;
+
+.sound-control input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
-nav a:hover{background:var(--ac2)}
-nav .btn{border-radius:10px;padding:7px 10px;font-size:13px}
-.w{
-grid-template-columns:repeat(12,minmax(0,1fr));
-gap:8px;
-max-width:1180px;
-padding:16px 24px 56px;
+
+.sound-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 9999px;
+  background-color: var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-#top{padding-top:72px}
-.hero{
-min-height:440px;
-grid-column:span 7;
-justify-content:flex-start;
-padding:72px 64px;
-border:0;
-border-radius:28px;
-background:
-linear-gradient(135deg,rgba(255,255,255,.82),rgba(237,244,255,.72)),
-var(--card);
-box-shadow:var(--shadow);
+
+.sound-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease;
 }
-:root[data-theme="dark"] .hero{
-background:linear-gradient(135deg,rgba(28,28,30,.96),rgba(16,36,61,.72));
+
+.sound-control input:checked + .sound-switch {
+  background-color: var(--accent);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero{background:linear-gradient(135deg,rgba(28,28,30,.96),rgba(16,36,61,.72))}}
-.hero-copy{max-width:760px}
-.hero h1{
-max-width:760px;
-margin-bottom:18px;
-font-size:clamp(40px,5vw,68px);
-font-weight:750;
-letter-spacing:-.055em;
-line-height:.98;
+
+.sound-control input:checked + .sound-switch::after {
+  transform: translateX(20px);
 }
-.hero h1 span{color:var(--ac)}
-.hero p{
-max-width:720px;
-margin-bottom:24px;
-font-size:18px;
-line-height:1.55;
-letter-spacing:-.01em;
+
+#trainerMessage {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  min-height: 24px;
 }
-.tag{
-margin-bottom:18px;
-border:0;
-background:var(--ac2);
-color:var(--ac);
-font-size:13px;
-font-weight:700;
+
+/* Visual Keyboard */
+.visual-keyboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+  padding: 14px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-subtle);
+  overflow-x: auto;
+  max-width: 100%;
 }
-.hero-actions{gap:10px}
-.btn{
-min-height:44px;
-padding:10px 16px;
-border-radius:12px;
-background:var(--ac);
-font-size:15px;
-font-weight:650;
-letter-spacing:-.01em;
-box-shadow:none;
-transition:transform .18s ease,filter .18s ease,box-shadow .18s ease;
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
 }
-.btn:hover{
-transform:translateY(-1px);
-filter:brightness(.98);
-box-shadow:0 8px 20px rgba(0,113,227,.14);
+
+.keyboard-key {
+  min-width: clamp(26px, 4.2vw, 50px);
+  height: 44px;
+  padding: 0 4px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+  font: 600 clamp(11px, 1.2vw, 15px)/1 var(--font-sans);
+  box-shadow: 0 2px 0 var(--border-color);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.08s ease, background-color 0.12s ease, border-color 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.btn.o{
-border:1px solid var(--bd);
-background:var(--card);
-color:var(--ac);
+
+.keyboard-key:hover {
+  background-color: var(--bg-surface-hover);
 }
-section{
-padding:28px;
-border:1px solid var(--bd);
-border-radius:26px;
-background:var(--card);
-box-shadow:var(--shadow);
-backdrop-filter:saturate(150%) blur(8px);
+
+.keyboard-key[data-key="ö"], .keyboard-key[data-key="ş"], .keyboard-key[data-key="ç"], .keyboard-key[data-key="ğ"] {
+  border: 2px solid #f59e0b;
+  background-color: rgba(245, 158, 11, 0.15);
+  font-weight: 700;
 }
-h1,h2,h3{text-wrap:balance}
-h2{font-size:32px;font-weight:720;letter-spacing:-.045em}
-.sub{font-size:15px;line-height:1.55}
-.card{
-border:1px solid var(--bd);
-border-radius:18px;
-background:var(--card);
-box-shadow:none;
-transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+
+.keyboard-key.active {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: #ffffff;
+  transform: translateY(2px);
+  box-shadow: none;
 }
-.card:hover{transform:translateY(-2px);border-color:rgba(0,113,227,.22);box-shadow:0 12px 28px rgba(0,0,0,.07)}
-.card h3{font-size:19px;font-weight:700;letter-spacing:-.025em}
-.letters{gap:10px}
-.l{
-min-height:68px;
-border-radius:16px;
-border:1px solid var(--bd);
-background:var(--card);
-transition:transform .16s ease,background .16s ease;
+
+.keyboard-key[data-key="ö"].active, .keyboard-key[data-key="ş"].active, .keyboard-key[data-key="ç"].active, .keyboard-key[data-key="ğ"].active {
+  background-color: #f59e0b;
+  border-color: #d97706;
+  color: #ffffff;
 }
-.l:hover,.l:focus-visible{transform:scale(1.04)}
-.l.n{background:var(--hl);border-color:rgba(0,113,227,.16)}
-textarea{
-min-height:190px;
-padding:16px;
-border-radius:17px;
-font-size:16px;
-line-height:1.6;
-box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+
+.keyboard-key.lesson-key {
+  outline: 2px solid #ef4444;
+  outline-offset: 1px;
+  border-color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
 }
-img.kb{
-border-radius:14px;
-border:1px solid var(--bd);
-background:var(--card);
+
+.keyboard-key.wide { min-width: clamp(42px, 6vw, 74px); }
+.keyboard-key.enter { min-width: clamp(68px, 9vw, 110px); }
+.keyboard-key.space { min-width: clamp(140px, 24vw, 260px); }
+
+.keyboard-key.pressed {
+  transform: translateY(2px);
+  box-shadow: none;
+  background-color: var(--accent-light);
 }
-.vid{border-radius:18px}
-.l::after{border-radius:8px}
-footer{
-font-size:13px;
-text-align:center;
+
+/* ==========================================================================
+   Image Zoom Modal
+   ========================================================================== */
+
+#imageZoom {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0.88);
+  overflow: hidden;
+  z-index: 9999;
 }
-#imageZoomClose{border-radius:50%}
-#trainer{grid-column:span 12}
-.trainer-card{width:100%;max-width:none;margin:18px auto 0;text-align:center}
-.trainer-status{display:flex;justify-content:space-between;margin-bottom:12px;color:var(--mut);font-size:13px;font-weight:650}
-.trainer-prompt{margin:8px 0 18px;font-size:clamp(36px,7vw,64px);font-weight:750;letter-spacing:-.04em;line-height:1}
-.trainer-input{min-height:58px;text-align:center;font-size:22px;font-weight:650}
-.trainer-actions{display:flex;justify-content:center;gap:10px;margin-top:12px}
-.trainer-actions .btn{min-width:140px}
-.sound-control{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 0;color:var(--mut);font-size:14px;font-weight:650}
-.sound-control input{position:absolute;opacity:0;pointer-events:none}
-.sound-switch{position:relative;width:44px;height:24px;border-radius:999px;background:var(--bd);box-shadow:inset 0 0 0 1px var(--bd);cursor:pointer;transition:background .18s ease}
-.sound-switch::after{content:'';position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.22);transition:transform .18s ease}
-.sound-control input:checked+.sound-switch{background:var(--ac)}
-.sound-control input:checked+.sound-switch::after{transform:translateX(20px)}
-.visual-keyboard{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:18px;padding:10px;border:1px solid var(--bd);border-radius:16px;background:rgba(127,127,127,.04);overflow:hidden}
-.keyboard-row{display:flex;justify-content:center;gap:4px;width:100%;min-width:0}
-.keyboard-key{width:clamp(34px,4.4vw,54px);height:46px;max-width:none;padding:0;border:1px solid var(--bd);border-radius:7px;background:var(--card);color:var(--tx);font:600 clamp(12px,1.2vw,17px)/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;box-shadow:0 2px 0 var(--bd);cursor:pointer;transition:transform .08s ease,background .12s ease,box-shadow .12s ease}
-.keyboard-key:hover{background:var(--ac2)}
-.keyboard-key[data-key="ö"],.keyboard-key[data-key="ş"],.keyboard-key[data-key="ç"],.keyboard-key[data-key="ğ"]{border:2px solid #ff9f0a;background:rgba(255,159,10,.18);color:var(--tx);box-shadow:0 3px 0 rgba(255,159,10,.5)}
-.keyboard-key[data-key="ö"]:hover,.keyboard-key[data-key="ş"]:hover,.keyboard-key[data-key="ç"]:hover,.keyboard-key[data-key="ğ"]:hover{background:rgba(255,159,10,.28)}
-.keyboard-key.active{border-color:var(--ac);background:var(--ac);color:#fff;transform:translateY(2px);box-shadow:0 1px 0 var(--bd)}
-.keyboard-key[data-key="ö"].active,.keyboard-key[data-key="ş"].active,.keyboard-key[data-key="ç"].active,.keyboard-key[data-key="ğ"].active{border-color:#ff9f0a;background:#ff9f0a;color:#1d1d1f;box-shadow:0 1px 0 rgba(255,159,10,.7)}
-.keyboard-key.lesson-key{outline:3px solid #ff453a;outline-offset:2px;border-color:#ff453a;background:#fff1f0;color:#b00020;box-shadow:0 0 0 5px rgba(255,69,58,.12)}
-:root[data-theme="dark"] .keyboard-key.lesson-key{background:#4a1717;color:#fff}
-.keyboard-key.wide{width:clamp(48px,6vw,78px)}
-.keyboard-key.enter{width:clamp(78px,10vw,132px)}
-.keyboard-key.space{width:clamp(170px,25vw,290px)}
-.keyboard-key.pressed{transform:translateY(3px);box-shadow:0 1px 0 var(--bd);background:var(--ac2)}
-.android-keyboards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
-.android-keyboards figure{margin:0;padding:8px;border:1px solid var(--bd);border-radius:16px;background:var(--card)}
-.android-keyboards img{width:100%;display:block;border-radius:10px;cursor:zoom-in;transition:transform .2s ease,box-shadow .2s ease;position:relative}
-.android-keyboards figure{overflow:hidden}
-@media (hover:hover){.android-keyboards img:hover{transform:scale(1.12);z-index:2;box-shadow:0 12px 32px rgba(0,0,0,.32)}}
-.android-keyboards figcaption{text-align:center;margin-top:7px;font-size:13px;color:var(--mut)}
-#trainerPrompt .typed{color:var(--mut)}
-#trainerPrompt .next{color:var(--ac)}
-#trainerPrompt .capital{color:#ff453a;font-weight:850}
-#trainerPrompt .new-letter{color:#ff453a;font-weight:850}
-#trainerMessage{color:#ff453a;font-weight:700}
-.trainer-combo{display:none;margin:-6px auto 16px;padding:10px 14px;border:1px solid rgba(255,69,58,.28);border-radius:12px;background:rgba(255,69,58,.08);color:var(--tx);font-size:14px;font-weight:650;line-height:1.5}
-.trainer-combo.visible{display:block}
-@media (max-width:900px){
-.w{grid-template-columns:repeat(6,minmax(0,1fr));padding:14px 16px 44px}
-#top{padding-top:36px}
-.hero{min-height:380px;padding:48px 40px}
-.hero h1{font-size:clamp(42px,8vw,64px)}
-nav{overflow-x:auto;flex-wrap:nowrap;top:8px}
-nav b{width:auto;margin-right:auto;white-space:nowrap}
-nav a{white-space:nowrap}
+
+#imageZoom[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-@media (max-width:640px){
-.w{gap:12px;padding:12px 12px 36px}
-#top{padding-top:16px}
-nav{width:calc(100% - 20px);margin-top:6px;border-radius:14px}
-.hero{min-height:0;padding:38px 24px;border-radius:22px}
-.hero h1{font-size:clamp(38px,12vw,54px);line-height:1}
-.hero p{font-size:16px}
-.hero-actions{width:100%;flex-direction:column}
-.hero-actions .btn{width:100%;text-align:center}
-section{padding:20px;border-radius:22px}
-h2{font-size:27px}
-.grid{grid-template-columns:1fr}
-.conv{grid-template-columns:1fr}
-.letters{grid-template-columns:repeat(auto-fill,minmax(58px,1fr))}
+
+#imageZoom img {
+  display: block;
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+}
+
+#imageZoomClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  padding: 24px 0 12px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 </style>
 </head>
 <body>
-<nav><b class="k">alifbomiz.uz</b><a href="#top" class="k" data-c="Бош саҳифа">Bosh sahifa</a><a href="#alifbo">Alifbo</a><a href="#trainer" class="k" data-c="Ёзиш машқи">Yozish mashqi</a><a href="#konverter">Konverter</a><a href="#yozish" class="k" data-c="Компьютер">Kompyuter</a><a href="#android" class="k" data-c="Телефон">Telefon</a><a href="#jihoz" class="k" data-c="Хизматлар">Xizmatlar</a><button class="btn o k" id="theme" type="button" aria-label="Rang rejimini almashtirish" aria-pressed="false">Qora rejim</button><button class="btn o k" id="lg" type="button">Кирилл</button></nav>
+
+<header class="nav-header">
+<nav class="nav-container">
+  <a href="#top" class="nav-brand k">alifbomiz.uz</a>
+  <div class="nav-controls">
+    <button class="btn o k" id="theme" type="button" aria-label="Rang rejimini almashtirish" aria-pressed="false">Qora rejim</button>
+    <button class="btn o k" id="lg" type="button">Кирилл</button>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Menyuni ochish/yopish">☰</button>
+  </div>
+  <div class="nav-links" id="navLinks">
+    <a href="#top" class="k" data-c="Бош саҳифа">Bosh sahifa</a>
+    <a href="#alifbo">Alifbo</a>
+    <a href="#trainer" class="k" data-c="Ёзиш машқи">Yozish mashqi</a>
+    <a href="#konverter">Konverter</a>
+    <a href="#yozish" class="k" data-c="Компьютер">Kompyuter</a>
+    <a href="#android" class="k" data-c="Телефон">Telefon</a>
+    <a href="#jihoz" class="k" data-c="Хизматлар">Xizmatlar</a>
+  </div>
+</nav>
+</header>
+
 <div id="top" class="w">
 <header class="hero">
 <div class="hero-copy">
-<h1>Yangi oʻzbek alifbosini <span>birgalikda</span> oʻrganamiz va joriy qilamiz.</h1>
-<p><span class="k" data-c="alifbomiz.uz сайти - янги ўзбек лотин алифбосини (Öö, Ğğ, Şş, Çç) оммалаштириш ва амалиётда қўллашни осонлаштиришга бағишланган платформа. Бу ерда компьютер ва телефонингизга янги клавиатура дастури ва иловаси ҳамда уларни ўрнатиш бўйича қўлланмалар, видео дарсликлар, ёзиш машқлари, кирилл ва эски лотин матнини янги алифбога ўгирадиган конвертер, клавиатуралар учун хизматлар жамланган.">alifbomiz.uz сайти - янги oʻzbek lotin alifbosini (Öö, Ğğ, Şş, Çç) ommalashtirish va amaliyotda qoʻllashni osonlashtirishga bagʻishlangan platforma. Bu yerda kompyuter va telefoningizga yangi klaviatura dasturi va ilovasi hamda ularni oʻrnatish boʻyicha qoʻllanmalar, video darsliklar, yozish mashqlari, kirill va eski lotin matnini yangi alifboga oʻgiradigan konverter, klaviaturalar uchun xizmatlar jamlangan.</span></p>
-<div class="hero-actions"><a class="btn" href="#windows">Kompyuterga klaviatura oʻrnatish tartibi</a> <a class="btn" href="#android">Telefonga klaviatura oʻrnatish tartibi</a> <a class="btn" href="#konverter">Matnlarni yangi alifboga oʻgirish</a> <a class="btn k" href="#trainer" data-c="Клавиатурада ёзиш машқи">Klaviaturada yozish mashqi</a></div>
+<h1><span class="k" data-c="Янги ўзбек алифбосини биргаликда ўрганамиз ва жорий қиламиз.">Yangi özbek alifbosini <span>birgalikda</span> örganamiz va joriy qilamiz.</span></h1>
+<p><span class="k" data-c="alifbomiz.uz сайти - янги ўзбек лотин алифбосини (Öö, Ğğ, Şş, Çç) оммалаштириш ва амалиётда қўллашни осонлаштиришга бағишланган платформа. Бу ерда компьютер ва телефонингизга янги клавиатура дастури ва иловаси ҳамда уларни ўрнатиш бўйича қўлланмалар, видео дарсликлар, ёзиш машқлари, кирилл ва эски лотин матнини янги алифбога ўгирадиган конвертер, клавиатуралар учун хизматлар жамланган.">alifbomiz.uz sayti - yangi özbek lotin alifbosini (Öö, Ğğ, Şş, Çç) ommalaştiriş va amaliyotda qöllaşni osonlaştirişga bağışlangan platforma. Bu yerda kompyuter va telefoningizga yangi klaviatura dasturi va ilovasi hamda ularni örnatiş böyiça qöllanmalar, video darsliklar, yoziş maşqlari, kirill va eski lotin matnini yangi alifboga ögiradigan konverter, klaviaturalar uçun xizmatlar jamlangan.</span></p>
+<div class="hero-actions"><a class="btn" href="#windows"><span class="k" data-c="Компьютерга клавиатура ўрнатиш тартиби">Kompyuterga klaviatura örnatiş tartibi</span></a> <a class="btn" href="#android"><span class="k" data-c="Телефонга клавиатура ўрнатиш тартиби">Telefonga klaviatura örnatiş tartibi</span></a> <a class="btn" href="#konverter"><span class="k" data-c="Матнларни янги алифбога ўгириш">Matnlarni yangi alifboga ögiriş</span></a> <a class="btn k" href="#trainer" data-c="Клавиатурада ёзиш машқи">Klaviaturada yoziş maşqi</a></div>
 </div>
 </header>
 
 <section id="windows">
-<h2><span class="k" data-c="Компьютер (Windows) учун янги ўзбек клавиатурасини ўрнатиш.">Kompyuter (Windows) uchun yangi oʻzbek klaviaturasini oʻrnatish.</span></h2>
+<h2><span class="k" data-c="Компьютер (Windows) учун янги ўзбек клавиатурасини ўрнатиш.">Kompyuter (Windows) uçun yangi özbek klaviaturasini örnatiş.</span></h2>
 <div class="grid">
-<div class="card"><h3>Қўлланма</h3>
-<ol><li>Клавиатура дастурини юклаб олинг.</li><li>Архивни очинг ва <b class="k">Uzb new latin-installer.exe</b> файлини ишга туширинг.</li><li>Тиллар созламасида <b class="k">UZB (Keyboard-Standard 2026, Узбекский (латиница))</b> ҳосил бўлади.</li><li>Клавиатуралар тилини <b class="k">Windows + Space (Пробел)</b>, <b class="k">Shift + Alt</b> ёки <b class="k">Ctrl + Shift</b> тугмаларини бирга босиш орқали алмаштиринг.</li></ol>
-<a class="btn" href="Uzb_new_latin-installer.zip" download>Dasturni yuklab olish</a></div>
-<div class="card"><h3>Video darslik</h3><div class="vid"><video controls playsinline preload="metadata"><source src="video01.mp4" type="video/mp4">Brauzeringiz videoni qoʻllab-quvvatlamaydi.</video></div></div>
+<div class="card"><h3><span class="k" data-c="Қўлланма">Qöllanma</span></h3>
+<ol><li><span class="k" data-c="Клавиатура дастурини юклаб олинг.">Klaviatura dasturini yuklab oling.</span></li><li><span class="k" data-c="Архивни очинг ва Uzb new latin-installer.exe файлини ишга туширинг.">Arxivni oçing va Uzb new latin-installer.exe faylini işga tuşiring.</span></li><li><span class="k" data-c="Тиллар созламасида UZB (Keyboard-Standard 2026, Узбекский (латиница)) ҳосил бўлади.">Tillar sozlamasida UZB (Keyboard-Standard 2026, Узбекский (латиница)) hosil böladi.</span></li><li><span class="k" data-c="Клавиатуралар тилини Windows + Space (Пробел), Shift + Alt ёки Ctrl + Shift тугмаларини бирга босиш орқали алмаштиринг.">Klaviaturalar tilini Windows + Space (Probel), Shift + Alt yoki Ctrl + Shift tugmalarini birgalikda bosiş orqali almaştiring.</span></li></ol>
+<a class="btn" href="Uzb_new_latin-installer.zip" download><span class="k" data-c="Дастурни юклаб олиш">Dasturni yuklab oliş</span></a></div>
+<div class="card"><h3><span class="k" data-c="Видео дарслик">Video darslik</span></h3><div class="vid"><video controls playsinline preload="metadata"><source src="video01.mp4" type="video/mp4">Brauzeringiz videoni qöllab-quvvatlamaydi.</video></div></div>
 </div>
 </section>
 
 <section id="trainer">
-<h2><span class="k" data-c="Клавиатурада ёзиш машқи">Klaviaturada yozish mashqi</span></h2>
-<p class="sub">Berilgan yangi alifbo harflari va soʻzlarini kompyuter klaviaturasida yozib mashq qiling.</p>
+<h2><span class="k" data-c="Клавиатурада ёзиш машқи">Klaviaturada yoziş maşqi</span></h2>
+<p class="sub"><span class="k" data-c="Берилган янги алифбо ҳарфлари ва сўзларини компьютер клавиатурасида ёзиб машқ қилинг.">Berilgan yangi alifbo harflari va sözlarini kompyuter klaviaturasida yozib maşq qiling.</span></p>
 <div class="trainer-card">
 <div class="trainer-status"><span id="trainerStep">1 / 10</span><span id="trainerAccuracy">Aniqlik: 100%</span></div>
 <div id="trainerPrompt" class="trainer-prompt" aria-live="polite">Özbekiston</div>
 <div id="trainerCombo" class="trainer-combo" aria-live="polite"></div>
 <input id="trainerInput" class="trainer-input" type="text" autocomplete="off" spellcheck="false" placeholder="Soʻzni shu yerga yozing">
 <div id="visualKeyboard" class="visual-keyboard" aria-label="Visual klaviatura" role="group"></div>
-<div class="trainer-actions"><button class="btn o" id="trainerSkip" type="button">Oʻzgartirish</button><button class="btn" id="trainerNext" type="button">Keyingi</button></div>
+<div class="trainer-actions"><button class="btn o" id="trainerSkip" type="button"><span class="k" data-c="Ўзгартириш">Özgartiriş</span></button><button class="btn" id="trainerNext" type="button"><span class="k" data-c="Кейинги">Keyingi</span></button></div>
 <label class="sound-control" for="trainerSound">
 <input id="trainerSound" type="checkbox" checked>
 <span class="sound-switch" aria-hidden="true"></span>
@@ -472,76 +1039,76 @@ h2{font-size:27px}
 </section>
 
 <section id="yozish">
-<h2><span class="k" data-c="Янги ҳарфлар ва тутуқ белгисининг компьютер клавиатурасидаги жойлашувлари">Yangi harflar va tutuq belgisining kompyuter klaviaturasidagi joylashuvlari</span></h2>
-<p class="sub"><span class="k" data-c="Клавиатура расмларида қизил билан ажратилган тугмаларда янги ҳарфлар ва тутуқ белгиси жойлаштирилган.">Klaviatura rasmlarida qizil bilan ajratilgan tugmalarda yangi harflar va tutuq belgisi joylashtirilgan.</span></p>
+<h2><span class="k" data-c="Янги ҳарфлар ва тутуқ белгисининг компьютер клавиатурасидаги жойлашувлари">Yangi harflar va tutuq belgisining kompyuter klaviaturasidagi joylaşuvlari</span></h2>
+<p class="sub"><span class="k" data-c="Клавиатура расмларида қизил билан ажратилган тугмаларда янги ҳарфлар ва тутуқ белгиси жойлаштирилган.">Klaviatura rasmlarida qizil bilan ajratilgan tugmalarda yangi harflar va tutuq belgisi joylaştirilgan.</span></p>
 <div class="grid">
-<figure class="card" style="margin:0"><img class="kb" alt="Katta harflar" src="Uzb new latin Shift Klv.jpg"><p style="margin:8px 0 0">Katta harflar (Shift bosilgan holda)</p></figure>
-<figure class="card" style="margin:0"><img class="kb" alt="Kichik harflar" src="Uzb new latin Klv.jpg"><p style="margin:8px 0 0">Kichik harflar</p></figure>
+<figure class="card" style="margin:0"><img class="kb" alt="Katta harflar" src="Uzb new latin Shift Klv.jpg"><p style="margin:8px 0 0"><span class="k" data-c="Катта ҳарфлар (Shift босилган ҳолда)">Katta harflar (Shift bosilgan holda)</span></p></figure>
+<figure class="card" style="margin:0"><img class="kb" alt="Kichik harflar" src="Uzb new latin Klv.jpg"><p style="margin:8px 0 0"><span class="k" data-c="Кичик ҳарфлар">Kichik harflar</span></p></figure>
 </div>
 <div class="card" style="margin-top:14px"><ul style="margin:0;padding-left:0;list-style:none">
-<li><b class="k">Ş ş</b> — “<span class="k">Q</span>” harfining oʻng yonidagi birinchi tugmaga joylashtirilgan.</li>
-<li><b class="k">Ç ç</b> — “<span class="k">X</span>” harfining oʻng yonidagi birinchi tugmaga joylashtirilgan.</li>
-<li><b class="k">Ğ ğ</b> — “<span class="k">P</span>” harfining oʻng yonidagi birinchi tugmaga joylashtirilgan.</li>
-<li><b class="k">Ö ö</b> — “<span class="k">L</span>” harfining oʻng yonidagi birinchi tugmaga joylashtirilgan.</li>
-<li><b class="k">ʼ</b> (tutuq belgisi) — <b class="k">L</b> tugmasining oʻng yonidagi ikkinchi tugmaga joylashtirilgan.</li>
-<li data-c="<b>w</b> - ҳарфини ёзиш учун <b>Alt Gr + ş</b> ёки <b>Alt + Ctrl + ş</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>www, web, wifi.</i>" data-l="<b>w</b> - harfini yozish uchun <b>Alt Gr + ş</b> yoki <b>Alt + Ctrl + ş</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>www, web, wifi.</i>"></li>
-<li data-c="<b>W</b> - ҳарфини ёзиш учун <b>Alt Gr + Şift + ş</b> ёки <b>Alt + Ctrl + Şift + ş</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>WIFI, Windows, WhatsApp.</i>" data-l="<b>W</b> - harfini yozish uchun <b>Alt Gr + Şift + ş</b> yoki <b>Alt + Ctrl + Şift + ş</b> tugmalarini birgalikда bosing. <b>Misol:</b> <i>WIFI, Windows, WhatsApp.</i>"></li>
-<li data-c="<b>c</b> - ҳарфини ёзиш учун <b>Alt Gr + ç</b> ёки <b>Alt + Ctrl + ç</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>c++, click, cafe.</i>" data-l="<b>c</b> - harfini yozish uchun <b>Alt Gr + ç</b> yoki <b>Alt + Ctrl + ç</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>c++, click, cafe.</i>"></li>
-<li data-c="<b>C</b> - ҳарфини ёзиш учун <b>Alt Gr + Şift + ç</b> ёки <b>Alt + Ctrl + Şift + ç</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>C++, Copilot, Chrome.</i>" data-l="<b>C</b> - harfini yozish uchun <b>Alt Gr + Şift + ç</b> yoki <b>Alt + Ctrl + Şift + ç</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>C++, Copilot, Chrome.</i>"></li>
+<li><b class="k">Ş ş</b> — “<span class="k" data-c="Q">Q</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">Ç ç</b> — “<span class="k" data-c="X">X</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">Ğ ğ</b> — “<span class="k" data-c="P">P</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">Ö ö</b> — “<span class="k" data-c="L">L</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">ʼ</b> (<span class="k" data-c="тутуқ белгиси">tutuq belgisi</span>) — <b class="k">L</b> <span class="k" data-c="тугмасининг ўнг ёнидаги иккинчи тугмага жойлаштирилган.">tugmasining öng yonidagi ikkinçi tugmaga joylaştirilgan.</span></li>
+<li data-c="<b>w</b> - ҳарфини ёзиш учун <b>Alt Gr + ş</b> ёки <b>Alt + Ctrl + ş</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>www, web, wifi.</i>" data-l="<b>w</b> - harfini yoziş uçun <b>Alt Gr + ş</b> yoki <b>Alt + Ctrl + ş</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>www, web, wifi.</i>"></li>
+<li data-c="<b>W</b> - ҳарфини ёзиш учун <b>Alt Gr + Şift + ş</b> ёки <b>Alt + Ctrl + Şift + ş</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>WIFI, Windows, WhatsApp.</i>" data-l="<b>W</b> - harfini yoziş uçun <b>Alt Gr + Şift + ş</b> yoki <b>Alt + Ctrl + Şift + ş</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>WIFI, Windows, WhatsApp.</i>"></li>
+<li data-c="<b>c</b> - ҳарфини ёзиш учун <b>Alt Gr + ç</b> ёки <b>Alt + Ctrl + ç</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>c++, click, cafe.</i>" data-l="<b>c</b> - harfini yoziş uçun <b>Alt Gr + ç</b> yoki <b>Alt + Ctrl + ç</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>c++, click, cafe.</i>"></li>
+<li data-c="<b>C</b> - ҳарфини ёзиш учун <b>Alt Gr + Şift + ç</b> ёки <b>Alt + Ctrl + Şift + ç</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>C++, Copilot, Chrome.</i>" data-l="<b>C</b> - harfini yoziş uçun <b>Alt Gr + Şift + ç</b> yoki <b>Alt + Ctrl + Şift + ç</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>C++, Copilot, Chrome.</i>"></li>
 </ul></div>
 </section>
 
 <section id="android">
-<h2>Telefon<br>(Android) uchun yangi oʻzbek klaviaturasini oʻrnatish.</h2>
+<h2><span class="k" data-c="Телефони (Android) учун янги ўзбек клавиатурасини ўрнатиш.">Telefon<br>(Android) uçun yangi özbek klaviaturasini örnatiş.</span></h2>
 <div class="grid">
-<div class="card"><h3>Qoʻllanma</h3>
-<ol><li><span class="k" data-c="Иловани Google Play орқали ўрнатинг.">Ilovani Google Play orqali oʻrnating.</span></li><li><span class="k" data-c="Тизим созламаларидан 'Uzbek keyboard'ни фаоллаштиринг.">Tizim sozlamalaridan 'Uzbek keyboard'ni faollashtiring.</span></li><li><span class="k" data-c="Асосий клавиатура сифатида 'Uzbek keyboard, Özbek (+ENG+ЎЗБ+RUS)'ни танланг.">Asosiy klaviatura sifatida 'Uzbek keyboard, Özbek (+ENG+ЎЗБ+RUS)'ni tanlang.</span></li><li><span class="k" data-c="Илова интерфейсини ўзингизга қулай алифбога ўтказишингиз ҳамда тугмалар босилганда товуш ва вибрацияни ёқиш ёки ўчиришингиз мумкин.">Ilova interfeysini oʻzingizga qulay alifboga oʻtkazishingiz hamda tugmalar bosilganda tovush va vibratsiyani yoqish yoki oʻchirishingiz mumkin.</span></li></ol>
+<div class="card"><h3><span class="k" data-c="Қўлланма">Qöllanma</span></h3>
+<ol><li><span class="k" data-c="Иловани Google Play орқали ўрнатинг.">Ilovani Google Play orqali örnating.</span></li><li><span class="k" data-c="Тизим созламаларидан 'Uzbek keyboard'ни фаоллаштиринг.">Tizim sozlamalaridan 'Uzbek keyboard'ni faollaştiring.</span></li><li><span class="k" data-c="Асосий клавиатура сифатида 'Uzbek keyboard, Özbek (+ENG+ЎЗБ+RUS)'ни танланг.">Asosiy klaviatura sifatida 'Uzbek keyboard, Özbek (+ENG+ЎЗБ+RUS)'ni tanlang.</span></li><li><span class="k" data-c="Илова интерфейсини ўзингизга қулай алифбога ўтказишингиз ҳамда тугмалар босилганда товуш ва вибрацияни ёқиш ёки ўчиришингиз мумкин.">Ilova interfeysini özingizga qulay alifboga ötkazişingiz hamda tugmalar bosilganda tovuş va vibratsiyani yoqiş yoki öçirişingiz mumkin.</span></li></ol>
 <a class="btn k" href="#" id="googlePlayLink">Google Play</a></div>
-<div class="card"><h3>Video darslik</h3><div class="vid"><video controls playsinline preload="metadata"><source src="video02.mp4" type="video/mp4">Brauzeringiz videoni qoʻllab-quvvatlamaydi.</video></div></div>
+<div class="card"><h3><span class="k" data-c="Видео дарслик">Video darslik</span></h3><div class="vid"><video controls playsinline preload="metadata"><source src="video02.mp4" type="video/mp4">Brauzeringiz videoni qöllab-quvvatlamaydi.</video></div></div>
 </div>
 <div class="android-keyboards">
-<figure><img src="keyboard-ozbek.png" alt="Oʻzbek lotin klaviaturasi"><figcaption class="k" data-c="Ўзбек лотин клавиатураси">Oʻzbek lotin klaviaturasi</figcaption></figure>
+<figure><img src="keyboard-ozbek.png" alt="Özbek lotin klaviaturasi"><figcaption class="k" data-c="Ўзбек лотин клавиатураси">Özbek lotin klaviaturasi</figcaption></figure>
 <figure><img src="keyboard-eng.png" alt="Ingliz klaviaturasi"><figcaption class="k" data-c="Инглиз клавиатураси">Ingliz klaviaturasi</figcaption></figure>
-<figure><img src="keyboard-ozbek-cyrl.png" alt="Oʻzbek kirill klaviaturasi"><figcaption class="k" data-c="Ўзбек кирилл клавиатураси">Oʻzbek kirill klaviaturasi</figcaption></figure>
+<figure><img src="keyboard-ozbek-cyrl.png" alt="Özbek kirill klaviaturasi"><figcaption class="k" data-c="Ўзбек кирилл клавиатураси">Özbek kirill klaviaturasi</figcaption></figure>
 <figure><img src="keyboard-rus.png" alt="Rus klaviaturasi"><figcaption class="k" data-c="Рус клавиатураси">Rus klaviaturasi</figcaption></figure>
 </div>
 </section>
 
 <section id="alifbo">
-<h2>Yangi ozbek lotin alifbosi</h2>
-<p class="sub">28 ta harf va tutuq belgisi ( <span class="k">ʼ</span> ). <span class="k" data-c="Сариқ рангда Ў → Ö, Ғ → Ğ, Ш → Ş, Ч → Ç ҳарфлари янги ҳарфлар сифатида алифбога қўшилган.">Sariq rangda Ў → Ö, Ғ → Ğ, Ш → Ş, Ч → Ç harflari yangi harflar sifatida alifboga qoʻshilgan.</span></p>
+<h2><span class="k" data-c="Янги ўзбек лотин алифбоси">Yangi özbek lotin alifbosi</span></h2>
+<p class="sub">28 ta harf va tutuq belgisi ( <span class="k">ʼ</span> ). <span class="k" data-c="Сариқ рангда Ў → Ö, Ғ → Ğ, Ш → Ş, Ч → Ç ҳарфлари янги ҳарфлар сифатида алифбога қўшилган.">Sariq rangda Ў → Ö, Ғ → Ğ, Ш → Ş, Ч → Ç harflari yangi harflar sifatida alifboga qöşilgan.</span></p>
 <div class="letters" id="lt"></div>
-<p class="note" data-c="Алифбо манбаси, 2026 йил 21 октябрдаги 1184-рақамли Ўзбекистон Республикаси қонуни." data-l="Alifbo manbasi, 2026 yil 21 oktabrdagi 1184-raqamli Oʻzbekiston Respublikasi qonuni.">Alifbo manbasi, 2026 yil 21 oktabrdagi 1184-raqamli Oʻzbekiston Respublikasi qonuni.</p>
+<p class="note" data-c="Алифбо манбаси, 2026 йил 21 октябрдаги 1184-рақамли Ўзбекистон Республикаси қонуни." data-l="Alifbo manbasi, 2026 yil 21 oktabrdagi 1184-raqamli Özbekiston Respublikasi qonuni.">Alifbo manbasi, 2026 yil 21 oktabrdagi 1184-raqamli Özbekiston Respublikasi qonuni.</p>
 </section>
 
 <section id="konverter">
-<h2>Konverter</h2>
-<p class="sub">Kirill yoki eski lotin matnini joylang — til avtomatik aniqlanadi va yangi alifboga oʻgiriladi.</p>
+<h2><span class="k" data-c="Конвертер">Konverter</span></h2>
+<p class="sub"><span class="k" data-c="Кирилл ёки эски лотин матнини жойланг — тил автоматик аниқланади ва янги алифбога ўгирилади.">Kirill yoki eski lotin matnini joylang — til avtomatik aniqlanadi va yangi alifboga ögiriladi.</span></p>
 <div class="conv">
-<div><textarea id="in" placeholder="Matnni shu yerga yozing: Ўзбекистон, O‘zbekiston, shahar, choy..."></textarea></div>
+<div><textarea id="in" placeholder="Matnni şu yerga yoziş: Ўзбекистон, O‘zbekiston, şahar, çoy..."></textarea></div>
 <div><textarea id="out" readonly placeholder="Natija shu yerda chiqadi"></textarea></div>
 </div>
-<p><span id="mode" class="note">Rejim: —</span> &nbsp; <button class="btn o" id="cp">Nusxalash</button> <button class="btn o" id="clr">Tozalash</button></p>
+<span id="mode" class="note"><span class="k" data-c="Режим: —">Rejim: —</span></span> &nbsp; <button class="btn o" id="cp"><span class="k" data-c="Нусхалаш">Nusxalaş</span></button> <button class="btn o" id="clr"><span class="k" data-c="Тозалаш">Tozalaş</span></button></p>
 <div class="docx-tools">
-<label class="btn o" for="docxFile"><span class="k" data-c="Word ҳужжатини очиш (.docx)">Word hujjatini ochish (.docx)</span></label>
+<label class="btn o" for="docxFile"><span class="k" data-c="Word ҳужжатини очиш (.docx)">Word hujjatini oçiş (.docx)</span></label>
 <input id="docxFile" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-<button class="btn o" id="docxDownload" type="button" disabled><span class="k" data-c="Янги лотиндаги .docx ни юклаб олиш">Yangi lotindagi .docx ni yuklab olish</span></button>
+<button class="btn o" id="docxDownload" type="button" disabled><span class="k" data-c="Янги лотиндаги .docx ни юклаб олиш">Yangi lotindagi .docx ni yuklab oliş</span></button>
 <span id="docxStatus" class="note" role="status" aria-live="polite"></span>
 <p class="note"><span class="k" data-c="Эски .doc файлларини аввал Word дастурида .docx форматида сақланг.">Eski .doc fayllarini avval Word dasturida .docx formatida saqlang.</span></p>
 </div>
 </section>
 
 <section id="jihoz">
-<h2><span class="k" data-c="Янги ҳарфлар билан ишлашга мослаштирилган клавиатура хизмати.">Yangi harflar bilan ishlashga moslashtirilgan klaviatura xizmati.</span></h2>
-<p class="sub"><span class="k" data-c="Компьютерингиз клавиатурасига янги ҳарфларни жойлаштиринг.">Kompyuter klaviaturangizga yangi harflarni joylashtiring.</span></p>
+<h2><span class="k" data-c="Янги ҳарфлар билан ишлашга мослаштирилган клавиатура хизмати.">Yangi harflar bilan işlaşga moslaştirilgan klaviatura xizmati.</span></h2>
+<p class="sub"><span class="k" data-c="Компьютерингиз клавиатурасига янги ҳарфларни жойлаштиринг.">Kompyuteringiz klaviaturasiga yangi harflarni joylaştiring.</span></p>
 <div class="grid">
-<div class="card"><h3><span class="k" data-c="Янги клавиатуралар">Yangi klaviaturalar</span></h3><p><span class="k" data-c="Ö, Ğ, Ş, Ç ҳарфлари босилган тайёр клавиатуралар.">Ö, Ğ, Ş, Ç harflari bosilgan tayyor klaviaturalar.</span></p><a class="btn o" href="#" data-todo="stores">Doʻkonlar roʻyxati</a><p id="storesInfo" class="note" role="status" aria-live="polite" hidden></p></div>
+<div class="card"><h3><span class="k" data-c="Янги клавиатуралар">Yangi klaviaturalar</span></h3><p><span class="k" data-c="Ў, Ғ, Ш, Ч ҳарфлари босилган тайёр клавиатуралар.">Ö, Ğ, Ş, Ç harflari bosilgan tayyor klaviaturalar.</span></p><a class="btn o" href="#" data-todo="stores"><span class="k" data-c="Дўконлар рўйхати">Dökonlar röyxati</span></a><p id="storesInfo" class="note" role="status" aria-live="polite" hidden></p></div>
 <div class="card"><h3><span class="k" data-c="Ҳарф стикерлари">Harf stikerlari</span></h3><p><span class="k" data-c="Мавжуд клавиатурангизга ёпиштириладиган янги ҳарф наклейкалари.">Mavjud klaviaturangizga yopishtiriladigan yangi harf nakleykalari.</span></p><a class="btn o" href="#" data-todo="stickers">Stiker buyurtma qilish</a><p id="stickersInfo" class="note" role="status" aria-live="polite" hidden></p></div>
-<div class="card"><h3><span class="k" data-c="Лазерда чизиш">Lazerda chizish</span></h3><p><span class="k" data-c="Клавиатурангизга янги ҳарфларни лазер ёрдамида чизиб бериш хизмати.">Klaviaturangizga yangi harflarni lazer yordamida chizib berish xizmati.</span></p><a class="btn o" href="#" data-todo="laser">Xizmat haqida</a><p id="laserInfo" class="note" role="status" aria-live="polite" hidden></p></div>
+<div class="card"><h3><span class="k" data-c="Лазерда чизиш">Lazerda çiziş</span></h3><p><span class="k" data-c="Клавиатурангизга янги ҳарфларни лазер ёрдамида чизиб бериш хизмати.">Klaviaturangizga yangi harflarni lazer yordamida çizib beriş xizmati.</span></p><a class="btn o" href="#" data-todo="laser"><span class="k" data-c="Хизмат ҳақида">Xizmat haqida</span></a><p id="laserInfo" class="note" role="status" aria-live="polite" hidden></p></div>
 </div>
 </section>
 
-<footer><span class="k" data-c="© 2026 alifbomiz.uz - янги ўзбек алифбосини оммалаштириш лойиҳаси. Сайт муаллифи Мирзабек Бўстонов.">© 2026 alifbomiz.uz - yangi oʻzbek alifbosini ommalashtirish loyihasi. Sayt muallifi Mirzabek Boʻstonov.</span> <span id="td"></span></footer>
+<footer><span class="k" data-c="© 2026 alifbomiz.uz - янги ўзбек алифбосини оммалаштириш лойиҳаси. Сайт муаллифи Мирзабек Бўстонов.">© 2026 alifbomiz.uz - yangi özbek alifbosini ommalaştiriş loyihasi. Sayt muallifi Mirzabek Böstonov.</span> <span id="td"></span></footer>
 </div>
 <dialog id="imageZoom" aria-label="Klaviatura rasmini kattalashtirish">
 <button class="btn o" id="imageZoomClose" type="button" aria-label="Yopish">×</button>
@@ -733,17 +1300,11 @@ function render(c){cy=c;
 try{localStorage.setItem('alifbomiz-language',c?'cyrl':'lat')}catch(e){}
 nodes.forEach(function(p){p[0].nodeValue=uiTx(p[1],c)});
 dc.forEach(function(p){
-if(p[0].hasAttribute('data-l')&&p[0].tagName==='P'){
+if(p[0].hasAttribute('data-l')&&p[0].hasAttribute('data-c')){
 p[0].textContent=c?p[0].getAttribute('data-c'):p[0].getAttribute('data-l');
 }
 else if(p[0].hasAttribute('data-l')){
-var keyText=p[0].getAttribute('data-l');
-var exactText=c?p[0].getAttribute('data-c'):p[0].getAttribute('data-l');
-if(keyText.indexOf('w')===0)exactText=c?'w - ҳарфини ёзиш учун <b>Alt Gr + ş</b> ёки <b>Alt + Ctrl + ş</b> тугмаларини биргаликда босинг.':'<b>w</b> - harfini yozish uchun <b>Alt Gr + ş</b> yoki <b>Alt + Ctrl + ş</b> tugmalarini birgalikda bosing.';
-else if(keyText.indexOf('W')===0)exactText=c?'W - ҳарфини ёзиш учун <b>Alt Gr + Şift + ş</b> ёки <b>Alt + Ctrl + Şift + ş</b> тугмаларини биргаликда босинг.':'<b>W</b> - harfini yozish uchun <b>Alt Gr + Şift + ş</b> yoki <b>Alt + Ctrl + Şift + ş</b> tugmalarini birgalikda bosing.';
-else if(keyText.indexOf('c')===0)exactText=c?'c - ҳарфини ёзиш учун <b>Alt Gr + ç</b> ёки <b>Alt + Ctrl + ç</b> тугмаларини биргаликда босинг.':'<b>c</b> - harfini yozish uchun <b>Alt Gr + ç</b> yoki <b>Alt + Ctrl + ç</b> tugmalarini birgalikda bosing.';
-else if(keyText.indexOf('C')===0)exactText=c?'C - ҳарфини ёзиш учун <b>Alt Gr + Şift + ç</b> ёки <b>Alt + Ctrl + Şift + ç</b> тугмаларини биргаликда босинг.':'<b>C</b> - harfini yozish uchun <b>Alt Gr + Şift + ç</b> yoki <b>Alt + Ctrl + Şift + ç</b> tugmalarini birgalikda bosing.';
-p[0].innerHTML=exactText||keyText;
+p[0].textContent=c?p[1]:p[0].getAttribute('data-l');
 }
 else p[0].textContent=c?p[0].getAttribute('data-c'):p[1];
 });
@@ -752,7 +1313,7 @@ document.documentElement.lang=c?'uz-Cyrl':'uz';
 document.title='Alifmiz.uz — alifbomiz.uz — Yangi özbek alifbosi';
 lg.textContent=c?'Lotin':'Кирилл';
 applyTheme();
-i.placeholder=c?'Матнни шу ерга ёзинг: Ўзбекистон, O‘zbekiston, шаҳар, чой...':'Matnni shu yerga yozing: Ўзбекистон, Oʻzbekiston, shahar, choy...';
+i.placeholder=c?'Матнни шу ерга ёзинг: Ўзбекистон, O‘zbekiston, шаҳар, чой...':'Matnni şu yerga yoziş: Ўзбекистон, O‘zbekiston, şahar, çoy...';
 o.placeholder=c?'Натижа шу ерда чиқади':'Natija shu yerda chiqadi';
 run()}
 lg.onclick=function(){render(!cy)};
@@ -761,7 +1322,7 @@ var googlePlayLink=document.getElementById('googlePlayLink');
 if(googlePlayLink){
 googlePlayLink.addEventListener('click',function(e){
 e.preventDefault();
-alert(cy?'Илова айни дамда Google Playда якунлий синовдан ўтмоқда. Сиз иловани 28 ноябрь куни юклаб олишингиз мумкин бўлади.':'Ilova hozirda Google Playda yakuniy sinovdan oʻtmoqda. Siz ilovani 28 noyabr kuni yuklab olishingiz mumkin boʻladi.');
+alert(cy?'Илова айни дамда Google Playда якунлий синовдан ўтмоқда. Сиз иловани 28 ноябрь куни юклаб олишингиз мумкин бўлади.':'Ilova hozirda Google Playda yakuniy sinovdan ötmoqda. Siz ilovani 28 noyabr kuni yuklab olişingiz mumkin böladi.');
 });
 }
 var trainerSound=document.getElementById('trainerSound'),trainerAudioContext=null;
@@ -1081,9 +1642,10 @@ info.hidden=false
 document.querySelectorAll('[data-todo]').forEach(function(a){a.addEventListener('click',function(e){
 e.preventDefault();
 var action=a.getAttribute('data-todo');
-if(action==='stores')showContactInfo('storesInfo','Ö, Ğ, Ş, Ç harflari bosilgan tayyor klaviaturalarni xarid qilmoqchi boʻlsangiz, ushbu raqamlarga murojaat qilishingiz mumkin:');
-else if(action==='stickers')showContactInfo('stickersInfo','Mavjud klaviaturangizga yopishtiriladigan yangi harf nakleykalarini xarid qilmoqchi boʻlsangiz, ushbu raqamlarga murojaat qilishingiz mumkin:');
-else if(action==='laser')showContactInfo('laserInfo','Klaviaturangizga yangi harflarni lazer yordamida chizib berish xizmatiga buyurtma bermoqchi boʻlsangiz, ushbu raqamlarga murojaat qilishingiz mumkin:');
+// ... ичидаги matnни ҳам янгилайман
+if(action==='stores')showContactInfo('storesInfo',cy?'Ö, Ğ, Ş, Ç ҳарфлари босилган тайёр клавиатураларни харид қилмоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин:\n+998 97 367 00 25\n+998 90 610 23 45\n+998 95 128 06 15\n+998 50 995 95 60':'Ö, Ğ, Ş, Ç harflari bosilgan tayyor klaviaturalarni xarid qilmoqchi bölsangiz, uşbu raqamlarga murojaat qilişingiz mumkin:\n+998 97 367 00 25\n+998 90 610 23 45\n+998 95 128 06 15\n+998 50 995 95 60');
+else if(action==='stickers')showContactInfo('stickersInfo',cy?'Мавжуд клавиатурангизга ёпиштириладиган янги ҳарф наклейкаларини харид қилмоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60':'Mavjud klaviaturangizga yopiştiriladigan yangi harf nakleykalarini xarid qilmoqchi bölsangiz, uşbu raqamlarga murojaat qilişingiz mumkin: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60');
+else if(action==='laser')showContactInfo('laserInfo',cy?'Клавиатурангизга янги ҳарфларни лазер ёрдамида чизиб бериш хизматига буюртма бермоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60':'Klaviaturangizga yangi harflarni lazer yordamida çizib beriş xizmatiga buyurtma bermoqchi bölsangiz, uşbu raqamlarga murojaat qilişingiz mumkin: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60');
 else document.getElementById('td').textContent=tx('Havola tez orada qoʻshiladi.',cy)
 })});
 render(cy);
