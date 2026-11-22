@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Alifmiz.uz — alifbomiz.uz — Yangi özbek alifbosi</title>
+<title>Alifbomiz.uz — Yangi özbek alifbosi</title>
 <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
 <script>
 try{
@@ -675,6 +675,10 @@ textarea:focus {
   cursor: not-allowed;
 }
 
+#storesInfo, #stickersInfo, #laserInfo {
+  white-space: pre-line;
+}
+
 #docxStatus {
   flex-basis: 100%;
   font-size: 0.875rem;
@@ -1001,13 +1005,13 @@ footer {
 </header>
 
 <div id="top" class="w">
-<header class="hero">
+<div class="hero">
 <div class="hero-copy">
 <h1><span class="k" data-c="Янги ўзбек алифбосини биргаликда ўрганамиз ва жорий қиламиз.">Yangi özbek alifbosini <span>birgalikda</span> örganamiz va joriy qilamiz.</span></h1>
 <p><span class="k" data-c="alifbomiz.uz сайти - янги ўзбек лотин алифбосини (Öö, Ğğ, Şş, Çç) оммалаштириш ва амалиётда қўллашни осонлаштиришга бағишланган платформа. Бу ерда компьютер ва телефонингизга янги клавиатура дастури ва иловаси ҳамда уларни ўрнатиш бўйича қўлланмалар, видео дарсликлар, ёзиш машқлари, кирилл ва эски лотин матнини янги алифбога ўгирадиган конвертер, клавиатуралар учун хизматлар жамланган.">alifbomiz.uz sayti - yangi özbek lotin alifbosini (Öö, Ğğ, Şş, Çç) ommalaştiriş va amaliyotda qöllaşni osonlaştirişga bağışlangan platforma. Bu yerda kompyuter va telefoningizga yangi klaviatura dasturi va ilovasi hamda ularni örnatiş böyiça qöllanmalar, video darsliklar, yoziş maşqlari, kirill va eski lotin matnini yangi alifboga ögiradigan konverter, klaviaturalar uçun xizmatlar jamlangan.</span></p>
 <div class="hero-actions"><a class="btn" href="#windows"><span class="k" data-c="Компьютерга клавиатура ўрнатиш тартиби">Kompyuterga klaviatura örnatiş tartibi</span></a> <a class="btn" href="#android"><span class="k" data-c="Телефонга клавиатура ўрнатиш тартиби">Telefonga klaviatura örnatiş tartibi</span></a> <a class="btn" href="#konverter"><span class="k" data-c="Матнларни янги алифбога ўгириш">Matnlarni yangi alifboga ögiriş</span></a> <a class="btn k" href="#trainer" data-c="Клавиатурада ёзиш машқи">Klaviaturada yoziş maşqi</a></div>
 </div>
-</header>
+</div>
 
 <section id="windows">
 <h2><span class="k" data-c="Компьютер (Windows) учун янги ўзбек клавиатурасини ўрнатиш.">Kompyuter (Windows) uçun yangi özbek klaviaturasini örnatiş.</span></h2>
@@ -1059,7 +1063,7 @@ footer {
 </section>
 
 <section id="android">
-<h2><span class="k" data-c="Телефони (Android) учун янги ўзбек клавиатурасини ўрнатиш.">Telefon<br>(Android) uçun yangi özbek klaviaturasini örnatiş.</span></h2>
+<h2><span class="k" data-c="Телефон (Android) учун янги ўзбек клавиатурасини ўрнатиш.">Telefon<br>(Android) uçun yangi özbek klaviaturasini örnatiş.</span></h2>
 <div class="grid">
 <div class="card"><h3><span class="k" data-c="Қўлланма">Qöllanma</span></h3>
 <ol><li><span class="k" data-c="Иловани Google Play орқали ўрнатинг.">Ilovani Google Play orqali örnating.</span></li><li><span class="k" data-c="Тизим созламаларидан 'Uzbek keyboard'ни фаоллаштиринг.">Tizim sozlamalaridan 'Uzbek keyboard'ni faollaştiring.</span></li><li><span class="k" data-c="Асосий клавиатура сифатида 'Uzbek keyboard, Özbek (+ENG+ЎЗБ+RUS)'ни танланг.">Asosiy klaviatura sifatida 'Uzbek keyboard, Özbek (+ENG+ЎЗБ+RUS)'ni tanlang.</span></li><li><span class="k" data-c="Илова интерфейсини ўзингизга қулай алифбога ўтказишингиз ҳамда тугмалар босилганда товуш ва вибрацияни ёқиш ёки ўчиришингиз мумкин.">Ilova interfeysini özingizga qulay alifboga ötkazişingiz hamda tugmalar bosilganda tovuş va vibratsiyani yoqiş yoki öçirişingiz mumkin.</span></li></ol>
@@ -1088,7 +1092,7 @@ footer {
 <div><textarea id="in" placeholder="Matnni şu yerga yoziş: Ўзбекистон, O‘zbekiston, şahar, çoy..."></textarea></div>
 <div><textarea id="out" readonly placeholder="Natija shu yerda chiqadi"></textarea></div>
 </div>
-<span id="mode" class="note"><span class="k" data-c="Режим: —">Rejim: —</span></span> &nbsp; <button class="btn o" id="cp"><span class="k" data-c="Нусхалаш">Nusxalaş</span></button> <button class="btn o" id="clr"><span class="k" data-c="Тозалаш">Tozalaş</span></button></p>
+<span id="mode" class="note"><span class="k" data-c="Режим: —">Rejim: —</span></span> &nbsp; <button class="btn o" id="cp"><span class="k" data-c="Нусхалаш">Nusxalaş</span></button> <button class="btn o" id="clr"><span class="k" data-c="Тозалаш">Tozalaş</span></button>
 <div class="docx-tools">
 <label class="btn o" for="docxFile"><span class="k" data-c="Word ҳужжатини очиш (.docx)">Word hujjatini oçiş (.docx)</span></label>
 <input id="docxFile" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
@@ -1102,7 +1106,7 @@ footer {
 <h2><span class="k" data-c="Янги ҳарфлар билан ишлашга мослаштирилган клавиатура хизмати.">Yangi harflar bilan işlaşga moslaştirilgan klaviatura xizmati.</span></h2>
 <p class="sub"><span class="k" data-c="Компьютерингиз клавиатурасига янги ҳарфларни жойлаштиринг.">Kompyuteringiz klaviaturasiga yangi harflarni joylaştiring.</span></p>
 <div class="grid">
-<div class="card"><h3><span class="k" data-c="Янги клавиатуралар">Yangi klaviaturalar</span></h3><p><span class="k" data-c="Ў, Ғ, Ш, Ч ҳарфлари босилган тайёр клавиатуралар.">Ö, Ğ, Ş, Ç harflari bosilgan tayyor klaviaturalar.</span></p><a class="btn o" href="#" data-todo="stores"><span class="k" data-c="Дўконлар рўйхати">Dökonlar röyxati</span></a><p id="storesInfo" class="note" role="status" aria-live="polite" hidden></p></div>
+<div class="card"><h3><span class="k" data-c="Янги клавиатуралар">Yangi klaviaturalar</span></h3><p><span class="k" data-c="Ö, Ğ, Ş, Ç ҳарфлари босилган тайёр клавиатуралар.">Ö, Ğ, Ş, Ç harflari bosilgan tayyor klaviaturalar.</span></p><a class="btn o" href="#" data-todo="stores"><span class="k" data-c="Дўконлар рўйхати">Dökonlar röyxati</span></a><p id="storesInfo" class="note" role="status" aria-live="polite" hidden></p></div>
 <div class="card"><h3><span class="k" data-c="Ҳарф стикерлари">Harf stikerlari</span></h3><p><span class="k" data-c="Мавжуд клавиатурангизга ёпиштириладиган янги ҳарф наклейкалари.">Mavjud klaviaturangizga yopishtiriladigan yangi harf nakleykalari.</span></p><a class="btn o" href="#" data-todo="stickers">Stiker buyurtma qilish</a><p id="stickersInfo" class="note" role="status" aria-live="polite" hidden></p></div>
 <div class="card"><h3><span class="k" data-c="Лазерда чизиш">Lazerda çiziş</span></h3><p><span class="k" data-c="Клавиатурангизга янги ҳарфларни лазер ёрдамида чизиб бериш хизмати.">Klaviaturangizga yangi harflarni lazer yordamida çizib beriş xizmati.</span></p><a class="btn o" href="#" data-todo="laser"><span class="k" data-c="Хизмат ҳақида">Xizmat haqida</span></a><p id="laserInfo" class="note" role="status" aria-live="polite" hidden></p></div>
 </div>
@@ -1301,7 +1305,7 @@ try{localStorage.setItem('alifbomiz-language',c?'cyrl':'lat')}catch(e){}
 nodes.forEach(function(p){p[0].nodeValue=uiTx(p[1],c)});
 dc.forEach(function(p){
 if(p[0].hasAttribute('data-l')&&p[0].hasAttribute('data-c')){
-p[0].textContent=c?p[0].getAttribute('data-c'):p[0].getAttribute('data-l');
+p[0].innerHTML=c?p[0].getAttribute('data-c'):p[0].getAttribute('data-l');
 }
 else if(p[0].hasAttribute('data-l')){
 p[0].textContent=c?p[1]:p[0].getAttribute('data-l');
@@ -1310,13 +1314,18 @@ else p[0].textContent=c?p[0].getAttribute('data-c'):p[1];
 });
 chart(c);
 document.documentElement.lang=c?'uz-Cyrl':'uz';
-document.title='Alifmiz.uz — alifbomiz.uz — Yangi özbek alifbosi';
+document.title='Alifbomiz.uz — Yangi özbek alifbosi';
 lg.textContent=c?'Lotin':'Кирилл';
 applyTheme();
 i.placeholder=c?'Матнни шу ерга ёзинг: Ўзбекистон, O‘zbekiston, шаҳар, чой...':'Matnni şu yerga yoziş: Ўзбекистон, O‘zbekiston, şahar, çoy...';
 o.placeholder=c?'Натижа шу ерда чиқади':'Natija shu yerda chiqadi';
 run()}
 lg.onclick=function(){render(!cy)};
+var navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
+function setNav(open){navLinks.classList.toggle('active',open);navToggle.setAttribute('aria-expanded',open?'true':'false');navToggle.textContent=open?'✕':'☰'}
+navToggle.setAttribute('aria-expanded','false');
+navToggle.addEventListener('click',function(){setNav(!navLinks.classList.contains('active'))});
+navLinks.addEventListener('click',function(e){if(e.target.closest('a'))setNav(false)});
 themeButton.onclick=function(){theme=theme==='dark'?'light':'dark';applyTheme()};
 var googlePlayLink=document.getElementById('googlePlayLink');
 if(googlePlayLink){
@@ -1377,7 +1386,7 @@ var trainerWords=[
 'Çinor', 
 'Kuçli',
 'Oçiq', 
-'İzlanuvçan',
+'Izlanuvçan',
 'Tinçlik', 
 'Ğalaba', 
 'Ğamxör', 
@@ -1463,7 +1472,7 @@ row.forEach(function(key){
 var button=document.createElement('button');
 button.type='button';
 button.className='keyboard-key'+(key==='Alt'||key==='AltGr'||key==='Ctrl'||key==='Shift'||key==='Caps Lock'||key==='Backspace'||key==='Delete'?' wide':'')+(key==='Enter'?' enter':'')+(key==='SPACE'?' space':'');
-button.textContent=key==='SPACE'?'':key==='Backspace'?'←':key==='Enter'?'Inter':(/^[a-zşğçöü]$/i.test(key)?((trainerCapsLock||trainerShift)&&!(trainerCapsLock&&trainerShift)?key.toUpperCase():key):key);
+button.textContent=key==='SPACE'?'':key==='Backspace'?'←':key==='Enter'?'Enter':(/^[a-zşğçöü]$/i.test(key)?((trainerCapsLock||trainerShift)&&!(trainerCapsLock&&trainerShift)?key.toUpperCase():key):key);
 button.dataset.key=key==='SPACE'?' ':key==='Enter'?'Enter':key.toLowerCase();
 button.setAttribute('aria-label',key==='SPACE'?'Boʻsh joy':key);
 button.addEventListener('click',function(){pressKey(button.dataset.key)});
@@ -1631,23 +1640,56 @@ window.addEventListener('load',function(){
 if(location.hash&&location.hash!=='#top'){
 try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}
 }
-window.scrollTo(0,0);
+window.scrollTo(0, 0);
 });
-function showContactInfo(id,intro){
-var info=document.getElementById(id);
-if(!info.hidden){info.hidden=true;return}
-info.textContent=tx(intro+'\n+998 97 367 00 25\n+998 90 610 23 45\n+998 95 128 06 15\n+998 50 995 95 60',cy);
-info.hidden=false
+
+function showContactInfo(id, intro) {
+  var info = document.getElementById(id);
+  if (!info) return;
+  if (!info.hidden) {
+    info.hidden = true;
+    return;
+  }
+  info.textContent = uiTx(intro, cy);
+  info.hidden = false;
 }
-document.querySelectorAll('[data-todo]').forEach(function(a){a.addEventListener('click',function(e){
-e.preventDefault();
-var action=a.getAttribute('data-todo');
-// ... ичидаги matnни ҳам янгилайман
-if(action==='stores')showContactInfo('storesInfo',cy?'Ö, Ğ, Ş, Ç ҳарфлари босилган тайёр клавиатураларни харид қилмоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин:\n+998 97 367 00 25\n+998 90 610 23 45\n+998 95 128 06 15\n+998 50 995 95 60':'Ö, Ğ, Ş, Ç harflari bosilgan tayyor klaviaturalarni xarid qilmoqchi bölsangiz, uşbu raqamlarga murojaat qilişingiz mumkin:\n+998 97 367 00 25\n+998 90 610 23 45\n+998 95 128 06 15\n+998 50 995 95 60');
-else if(action==='stickers')showContactInfo('stickersInfo',cy?'Мавжуд клавиатурангизга ёпиштириладиган янги ҳарф наклейкаларини харид қилмоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60':'Mavjud klaviaturangizga yopiştiriladigan yangi harf nakleykalarini xarid qilmoqchi bölsangiz, uşbu raqamlarga murojaat qilişingiz mumkin: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60');
-else if(action==='laser')showContactInfo('laserInfo',cy?'Клавиатурангизга янги ҳарфларни лазер ёрдамида чизиб бериш хизматига буюртма бермоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60':'Klaviaturangizga yangi harflarni lazer yordamida çizib beriş xizmatiga buyurtma bermoqchi bölsangiz, uşbu raqamlarga murojaat qilişingiz mumkin: +998 97 367 00 25, +998 90 610 23 45, +998 95 128 06 15, +998 50 995 95 60');
-else document.getElementById('td').textContent=tx('Havola tez orada qoʻshiladi.',cy)
-})});
+
+document.querySelectorAll('[data-todo]').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    var action = a.getAttribute('data-todo');
+    var phones = '\n+998 97 367 00 25,\n+998 90 610 23 45,\n+998 95 128 06 15,\n+998 50 995 95 60.';
+
+    if (action === 'stores') {
+      showContactInfo(
+        'storesInfo',
+        cy
+          ? 'Ö, Ğ, Ş, Ç ҳарфлари босилган тайёр клавиатураларни харид қилмоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин:' + phones
+          : "Oʻ, Gʻ, Sh, Ch harflari bosilgan tayyor klaviaturalarni xarid qilmoqchi boʻlsangiz, ushbu raqamlarga murojaat qilishingiz mumkin:" + phones
+      );
+    } else if (action === 'stickers') {
+      showContactInfo(
+        'stickersInfo',
+        cy
+          ? 'Мавжуд клавиатурангизга ёпиштириладиган янги ҳарф наклейкаларини харид қилмоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин:' + phones
+          : "Mavjud klaviaturangizga yopishtiriladigan yangi harf nakleykalarini xarid qilmoqchi boʻlsangiz, ushbu raqamlarga murojaat qilishingiz mumkin:" + phones
+      );
+    } else if (action === 'laser') {
+      showContactInfo(
+        'laserInfo',
+        cy
+          ? 'Клавиатурангизга янги ҳарфларни лазер ёрдамида чизиб бериш хизматига буюртма бермоқчи бўлсангиз, ушбу рақамларга мурожаат қилишингиз мумкин:' + phones
+          : "Klaviaturangizga yangi harflarni lazer yordamida chizib berish xizmatiga buyurtma bermoqchi boʻlsangiz, ushbu raqamlarga murojaat qilishingiz mumkin:" + phones
+      );
+    } else {
+      var td = document.getElementById('td');
+      if (td) {
+        td.textContent = tx('Havola tez orada qoʻshiladi.', cy);
+      }
+    }
+  });
+});
+
 render(cy);
 })();
 </script>
