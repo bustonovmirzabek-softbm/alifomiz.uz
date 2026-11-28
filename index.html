@@ -878,7 +878,7 @@ textarea:focus {
   background-color: var(--bg-surface-hover);
 }
 
-.keyboard-key[data-key="ö"], .keyboard-key[data-key="ş"], .keyboard-key[data-key="ç"], .keyboard-key[data-key="ğ"] {
+.keyboard-key[data-key="ö"], .keyboard-key[data-key="ş"], .keyboard-key[data-key="ç"], .keyboard-key[data-key="ğ"], .keyboard-key[data-key="ʼ"] {
   border: 2px solid #f59e0b;
   background-color: rgba(245, 158, 11, 0.15);
   font-weight: 700;
@@ -892,7 +892,7 @@ textarea:focus {
   box-shadow: none;
 }
 
-.keyboard-key[data-key="ö"].active, .keyboard-key[data-key="ş"].active, .keyboard-key[data-key="ç"].active, .keyboard-key[data-key="ğ"].active {
+.keyboard-key[data-key="ö"].active, .keyboard-key[data-key="ş"].active, .keyboard-key[data-key="ç"].active, .keyboard-key[data-key="ğ"].active, .keyboard-key[data-key="ʼ"].active {
   background-color: #f59e0b;
   border-color: #d97706;
   color: #ffffff;
@@ -958,6 +958,32 @@ textarea:focus {
   padding: 0;
   font-size: 24px;
   line-height: 1;
+}
+
+#googlePlayDialog {
+  width: min(520px, calc(100vw - 32px));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  box-shadow: var(--shadow-xl);
+  padding: 24px;
+}
+
+#googlePlayDialog::backdrop {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+#googlePlayDialog p {
+  margin: 0 0 20px;
+  line-height: 1.7;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* ==========================================================================
@@ -1050,15 +1076,13 @@ footer {
 <figure class="card" style="margin:0"><img class="kb" alt="Kichik harflar" src="Uzb new latin Klv.jpg"><p style="margin:8px 0 0"><span class="k" data-c="Кичик ҳарфлар">Kichik harflar</span></p></figure>
 </div>
 <div class="card" style="margin-top:14px"><ul style="margin:0;padding-left:0;list-style:none">
-<li><b class="k">Ş ş</b> — “<span class="k" data-c="Q">Q</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
-<li><b class="k">Ç ç</b> — “<span class="k" data-c="X">X</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
-<li><b class="k">Ğ ğ</b> — “<span class="k" data-c="P">P</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
-<li><b class="k">Ö ö</b> — “<span class="k" data-c="L">L</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
-<li><b class="k">ʼ</b> (<span class="k" data-c="тутуқ белгиси">tutuq belgisi</span>) — <b class="k">L</b> <span class="k" data-c="тугмасининг ўнг ёнидаги иккинчи тугмага жойлаштирилган.">tugmasining öng yonidagi ikkinçi tugmaga joylaştirilgan.</span></li>
-<li data-c="<b>w</b> - ҳарфини ёзиш учун <b>Alt Gr + ş</b> ёки <b>Alt + Ctrl + ş</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>www, web, wifi.</i>" data-l="<b>w</b> - harfini yoziş uçun <b>Alt Gr + ş</b> yoki <b>Alt + Ctrl + ş</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>www, web, wifi.</i>"></li>
-<li data-c="<b>W</b> - ҳарфини ёзиш учун <b>Alt Gr + Şift + ş</b> ёки <b>Alt + Ctrl + Şift + ş</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>WIFI, Windows, WhatsApp.</i>" data-l="<b>W</b> - harfini yoziş uçun <b>Alt Gr + Şift + ş</b> yoki <b>Alt + Ctrl + Şift + ş</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>WIFI, Windows, WhatsApp.</i>"></li>
-<li data-c="<b>c</b> - ҳарфини ёзиш учун <b>Alt Gr + ç</b> ёки <b>Alt + Ctrl + ç</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>c++, click, cafe.</i>" data-l="<b>c</b> - harfini yoziş uçun <b>Alt Gr + ç</b> yoki <b>Alt + Ctrl + ç</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>c++, click, cafe.</i>"></li>
-<li data-c="<b>C</b> - ҳарфини ёзиш учун <b>Alt Gr + Şift + ç</b> ёки <b>Alt + Ctrl + Şift + ç</b> тугмаларини биргаликда босинг. <b>Мисол:</b> <i>C++, Copilot, Chrome.</i>" data-l="<b>C</b> - harfini yoziş uçun <b>Alt Gr + Şift + ç</b> yoki <b>Alt + Ctrl + Şift + ç</b> tugmalarini birgalikda bosing. <b>Misol:</b> <i>C++, Copilot, Chrome.</i>"></li>
+<li><b class="k">Ö ö</b> — “<span class="k" data-c="P">P</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">Ğ ğ</b> — “<span class="k" data-c="P">P</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги иккинчи тугмага жойлаштирилган.">harfining öng yonidagi ikkinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">Ş ş</b> — “<span class="k" data-c="L">L</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">Ç ç</b> — “<span class="k" data-c="L">L</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги иккинчи тугмага жойлаштирилган.">harfining öng yonidagi ikkinçi tugmaga joylaştirilgan.</span></li>
+<li><b class="k">ʼ</b> (<span class="k" data-c="тутуқ белгиси">tutuq belgisi</span>) — <b class="k">1</b> <span class="k" data-c="рақамининг чап ёнидаги биринчи тугмага жойлаштирилган.">raqaminin çap yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><b>:</b> <span class="k" data-c="(иккин нуқта) ва ; (нуқта вергул) белгилари">(<b>ikkin nuqta</b>) va ; (<b>nuqta vergul</b>) belgilari</span> — “<span class="k" data-c="Ğ ğ">Ğ ğ</span>” <span class="k" data-c="ҳарфининг ўнг ёнидаги биринчи тугмага жойлаштирилган.">harfining öng yonidagi birinçi tugmaga joylaştirilgan.</span></li>
+<li><span class="k" data-c="“ (қўш тирноқ) белгисини ёзиш учун ʼ (тутуқ белгиси) Shift тугмаси билан бирга босилади.">“ (qöş tirnoq) belgisini yoziş uçun ʼ (tutuq belgisi) Shift tugmasi bilan birga bosiladi.</span></li>
 </ul></div>
 </section>
 
@@ -1117,6 +1141,13 @@ footer {
 <dialog id="imageZoom" aria-label="Klaviatura rasmini kattalashtirish">
 <button class="btn o" id="imageZoomClose" type="button" aria-label="Yopish">×</button>
 <img alt="">
+</dialog>
+<dialog id="googlePlayDialog" aria-labelledby="googlePlayDialogText">
+<p id="googlePlayDialogText"></p>
+<div class="dialog-actions">
+<a class="btn" href="Uzb_keyboard_V2.5.apk" download="Uzb_keyboard_V2.5.apk" id="androidAppDownload"><span id="androidAppDownloadText">Ilovani yuklash</span></a>
+<button class="btn o" id="googlePlayDialogClose" type="button">Yopish</button>
+</div>
 </dialog>
 <script src="jszip.min.js"></script>
 <script>
@@ -1328,12 +1359,27 @@ navToggle.addEventListener('click',function(){setNav(!navLinks.classList.contain
 navLinks.addEventListener('click',function(e){if(e.target.closest('a'))setNav(false)});
 themeButton.onclick=function(){theme=theme==='dark'?'light':'dark';applyTheme()};
 var googlePlayLink=document.getElementById('googlePlayLink');
+var googlePlayDialog=document.getElementById('googlePlayDialog');
+var googlePlayDialogText=document.getElementById('googlePlayDialogText');
+var googlePlayDialogClose=document.getElementById('googlePlayDialogClose');
+var androidAppDownload=document.getElementById('androidAppDownload');
+var androidAppDownloadText=document.getElementById('androidAppDownloadText');
 if(googlePlayLink){
 googlePlayLink.addEventListener('click',function(e){
 e.preventDefault();
-alert(cy?'Илова айни дамда Google Playда якунлий синовдан ўтмоқда. Сиз иловани 28 ноябрь куни юклаб олишингиз мумкин бўлади.':'Ilova hozirda Google Playda yakuniy sinovdan ötmoqda. Siz ilovani 28 noyabr kuni yuklab olişingiz mumkin böladi.');
+googlePlayDialogText.textContent=cy
+  ? 'Илова айни дамда Google Playда якунлий синовдан ўтмоқда. Агар уни файл орқали ўрнатишни хоҳласангиз, «Иловани юклаш» тугмасини босинг.'
+  : 'Ilova hozirda Google Playda yakuniy sinovdan ötmoqda. Agar uni fayl orqali örnatishni xohlasangiz, «Ilovani yuklash» tugmasini bosing.';
+androidAppDownloadText.textContent=cy?'Иловани юклаш':'Ilovani yuklash';
+googlePlayDialogClose.textContent=cy?'Ёпиш':'Yopiş';
+googlePlayDialog.showModal();
 });
 }
+googlePlayDialogClose.addEventListener('click',function(){googlePlayDialog.close()});
+googlePlayDialog.addEventListener('click',function(e){if(e.target===googlePlayDialog)googlePlayDialog.close()});
+androidAppDownload.addEventListener('click',function(e){
+googlePlayDialog.close();
+});
 var trainerSound=document.getElementById('trainerSound'),trainerAudioContext=null;
 try{trainerSound.checked=localStorage.getItem('alifbomiz-trainer-sound')!=='off'}catch(e){}
 trainerSound.addEventListener('change',function(){
@@ -1416,9 +1462,9 @@ var trainerCapsLock=false,trainerShift=false,trainerAlt=false,trainerCtrl=false,
 var trainerPrompt=document.getElementById('trainerPrompt'),trainerCombo=document.getElementById('trainerCombo'),trainerInput=document.getElementById('trainerInput'),trainerStep=document.getElementById('trainerStep'),trainerAccuracy=document.getElementById('trainerAccuracy'),trainerMessage=document.getElementById('trainerMessage');
 var visualKeyboard=document.getElementById('visualKeyboard');
 var keyboardRows=[
-['q','ş','e','r','t','y','u','i','o','p','ğ','Backspace'],
-['Caps Lock','a','s','d','f','g','h','j','k','l','ö','ʼ'],
-['Shift','z','x','ç','v','b','n','m','Shift','Enter'],
+['ʼ','q','w','e','r','t','y','u','i','o','p','ö','ğ','Backspace'],
+['Caps Lock','a','s','d','f','g','h','j','k','l','ş','ç'],
+['Shift','z','x','c','v','b','n','m','Shift','Enter'],
 ['Ctrl','Alt','SPACE','AltGr','Ctrl']
 ];
 function escapeHtml(text){return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
